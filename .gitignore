@@ -1,0 +1,38 @@
+# ── Python ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.venv/
+venv/
+env/
+
+# ── Artifacts (large numpy files — use Git LFS or Colab download) ──
+artifacts/
+*.npy
+*.pkl
+*.pickle
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Dataset (465 MB — use Google Drive in Colab, not Git) ──
+candidates.jsonl
+candidates.jsonl.gz
+
+# ── Outputs ──
+output/
+submission.csv
+submission2.csv
+submission3.csv
+submission_preview.csv
+
+# ── Secrets ──
+*.env
+.env

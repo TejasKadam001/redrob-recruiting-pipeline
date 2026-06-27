@@ -1,0 +1,90 @@
+# Redrob Hackathon — Submission Metadata
+# ⚠️  FILL IN: team_name, primary_contact, github_repo, sandbox_link before submitting
+
+# ============================================================================
+# Team identity
+# ============================================================================
+team_name: "YOUR_TEAM_NAME"  # ← FILL IN
+
+primary_contact:
+  name: "Tanmay Kadam"
+  email: "YOUR_EMAIL@example.com"    # ← FILL IN
+  phone: "+91-XXXXXXXXXX"             # ← FILL IN
+
+team_members:
+  - name: "Tanmay Kadam"
+    email: "YOUR_EMAIL@example.com"
+    role: "ML Engineer / Team Lead"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/TejasKadam001/redrob-recruiting-pipeline"
+
+sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"  # ← FILL IN after HF deploy
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --artifacts ./artifacts/ --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Google Colab T4 GPU (pre-computation) + CPU 16GB (ranking)"
+  cpu_cores: 2
+  ram_gb: 16
+  python_version: "3.11"
+  os: "Linux (Colab)"
+  uses_gpu_for_inference: false          # Ranking step is CPU-only ✅
+  has_network_during_ranking: false      # No API calls during ranking ✅
+  pre_computation_required: true         # Embeddings pre-computed on Colab GPU
+  pre_computation_time_minutes: 30       # ~25-35 min on T4 for 100K candidates
+
+# ============================================================================
+# AI tools declaration
+# ============================================================================
+ai_tools_used:
+  - "Claude"          # Architecture design, code review, domain expertise
+
+ai_usage_summary: |
+  Used Claude (Anthropic) for architectural design discussion, code review,
+  and recruiting domain expertise. All engineering decisions, feature weights,
+  ontology design, and anti-trap logic were human-engineered and validated
+  against the dataset. No candidate data was fed to any LLM during ranking.
+  Claude was used as a pair-programming tool, not as a ranker.
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Three-stage hybrid ranker combining semantic embeddings, cross-encoder
+  reranking, and 40+ engineered features.
+
+  Stage 1: Hard filter using a 10-check honeypot detector (salary range
+  inversion, skill duration impossibility, future certs, career-after-signup,
+  edu/career overlap, etc.) plus behavioral ghost removal.
+
+  Stage 2: BM25 trigram TF-IDF pre-filter (100K → 6K), followed by
+  BAAI/bge-large-en-v1.5 bi-encoder semantic matching (6K → 2K), followed
+  by BAAI/bge-reranker-large cross-encoder reranking of top 500. All GPU
+  computation is pre-computed offline on Google Colab T4.
+
+  Stage 3: Feature fusion — 40 engineered features across 5 groups (domain
+  fit 35%, skills 25%, experience 20%, behavioral 15%, logistics 5%).
+  Behavioral signals applied as a multiplicative gate (0.35–1.25×), not
+  additive. Penalties for keyword stuffers, consulting-only careers, and
+  wrong-domain candidates. Hidden gem boost for retrieval work described in
+  plain language.
+
+  Final score: 0.45×CrossEncoder + 0.30×Semantic + 0.25×Rules × Behavioral.
+  Reasoning: rank-tier-specific language passing all 6 manual review criteria.
+  Ranking step runtime: <60 seconds CPU with pre-computed artifacts.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true         # 10-check detector explicitly implemented
+  reproduction_tested: true
