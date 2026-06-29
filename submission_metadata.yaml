@@ -4,24 +4,33 @@
 # ============================================================================
 # Team identity
 # ============================================================================
-team_name: "YOUR_TEAM_NAME"  # ← FILL IN
+team_name: "Scalar"  # ← FILL IN
 
 primary_contact:
-  name: "Tanmay Kadam"
-  email: "YOUR_EMAIL@example.com"    # ← FILL IN
-  phone: "+91-XXXXXXXXXX"             # ← FILL IN
+  name: "Tejas Kadam"
+  email: "tejaskadam4457@example.com"    # ← FILL IN
+  phone: "+91-8767256599"             # ← FILL IN
 
 team_members:
-  - name: "Tanmay Kadam"
-    email: "YOUR_EMAIL@example.com"
+  - name: "Tejas Kadam"
+    email: "tejaskadam4457@example.com"
     role: "ML Engineer / Team Lead"
+  - name: "Shiva Singh"
+    email: "shiva.singh@example.com"
+    role: "AI Engineer"
+  - name: "Shruti Raut"
+    email: "shruti.raut@example.com"
+    role: "Data Scientist"
+  - name: "Kshitij Nikam"
+    email: "kshitij.nikam@example.com"
+    role: "Software Developer"
 
 # ============================================================================
 # Code and reproducibility
 # ============================================================================
 github_repo: "https://github.com/TejasKadam001/redrob-recruiting-pipeline"
 
-sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"  # ← FILL IN after HF deploy
+sandbox_link: "https://huggingface.co/spaces/tejaskadam001/redrob-ranker"
 
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --artifacts ./artifacts/ --out ./submission.csv"
 
