@@ -1,14 +1,3 @@
----
-title: Redrob Ranker
-emoji: 🎯
-colorFrom: gray
-colorTo: blue
-sdk: gradio
-sdk_version: 6.0.0
-app_file: app.py
-pinned: false
----
-
 # Redrob Candidate Ranker
 
 Hybrid retrieval-and-ranking system for the Redrob Intelligent Candidate Discovery challenge. Given 100,000 anonymized job-seeker profiles and a single Senior ML/AI Engineer job description, the pipeline identifies the top 100 best-fit candidates, assigns ranks and scores, and generates per-candidate reasoning — all within the hackathon compute constraints (CPU-only ranking, no API calls at inference time).
